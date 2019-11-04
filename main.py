@@ -4,10 +4,15 @@ import math
 
 BLACK = (  0,   0,   0)
 WHITE = (255, 255, 255)
-BLUE =  (  0,   0, 255)
-GREEN = (  0, 255,   0)
-RED =   (255,   0,   0)
 
+
+RED = (255, 0, 0)
+ORANGE = (255, 128, 0)
+YELLOW = (255, 255, 0)
+GREEN = (0, 255, 0)
+BLUE = (0, 0, 255)
+INDIGO = (75, 0, 130)
+VIOLET = (255, 0, 255)
 
 class DrawCircle:
     def __init__(self, color, speed, coords, angle, radius, next_tick):
@@ -48,8 +53,6 @@ class DrawCircle:
         pygame.draw.lines(screen, self.color, False, self.points, 1)
         pygame.draw.circle(screen, WHITE, [int(self.coords[0]), int(self.coords[1])], 4)
 
-
-
 def move_coords(angle, radius, coords):
     theta = math.radians(angle)
     return coords[0] + radius * math.cos(theta), coords[1] + radius * math.sin(theta)
@@ -62,17 +65,8 @@ def drawHouse(x, y, width, height, screen, color):
 
 def main():
     pygame.display.set_caption("Oribit")
-    screen = pygame.display.set_mode((800, 600))
+    screen = pygame.display.set_mode((800, 800))
     clock = pygame.time.Clock()
-
-    coords = 400, 200
-
-    angle = 0
-    rect = pygame.Rect(coords[0], coords[1], 20, 20)
-    points = []
-    points.append([int(coords[0]), int(coords[1])])
-    speed = 1 # 30 is about 1 rev per 10 seconds
-    next_tick = 1
     vert_circles = []
     RainBow = []
     RainBow.append(RED)
@@ -83,16 +77,16 @@ def main():
     RainBow.append(INDIGO)
     RainBow.append(VIOLET)
     test_coords = 100, 100
-    vert_circles.append(DrawCircle(RainBow[0], 30, test_coords, 90, 0.5, 1))
-    test_coords = 100, 200
-    vert_circles.append(DrawCircle(RainBow[1], 30, test_coords, 90, 0.5, 1))
     for i in range(7):
-        pass
+        test_coords = 78, 100 + (78 * i)
+        speed = 30 
+        vert_circles.append(DrawCircle(RainBow[i], speed, test_coords, 90, 0.5, 1))
+    for i in range(7):
+        test_coords = 150 + (78 * i), 39
+        vert_circles.append(DrawCircle(RainBow[i], 1, test_coords, 90, 0.5, 1))
 
-    # draw_test = DrawCircle(RED, 30, test_coords, 90, 0.5, 1)
-    #
-    # test_coords = 200, 100
-    # draw_test_2 = DrawCircle(GREEN, 5, test_coords, 90, 0.5, 1)
+
+
 
     running = True
     while running:
@@ -107,43 +101,17 @@ def main():
         ticks = pygame.time.get_ticks()
         for i in range(len(vert_circles)):
             vert_circles[i].add_points(ticks)
-        # draw_test.add_points(ticks)
-        # draw_test_2.add_points(ticks)
-        if ticks > next_tick:
-            next_tick += speed
-            angle += 1
-            coords = move_coords(angle, 0.5, coords)
-            rect.topleft = coords
-            points.append([int(coords[0]), int (coords[1])])
 
-        if points[-1] == [400, 199]:
-            coords = 400, 200
-            angle = 0
-            temp = []
-            temp.append(points[0])
-            temp.append(points[1])
-            points.clear()
 
-            # points.append(temp[0])
-            # points.append(temp[1])
-            points.append([int(coords[0]), int(coords[1])])
-            coords = move_coords(angle, 0.5, coords)
-            points.append([int(coords[0]), int(coords[1])])
-            # print("points[-1]")
-            # print(points[-1])
-            # print("coords")
-            # print(coords)
 
 
 
         screen.fill((0, 0, 30))
-        # screen.fill((0, 150, 150), rect)
-        pygame.draw.lines(screen, BLUE, False, points, 2)
-        pygame.draw.circle(screen, WHITE, [int(coords[0]), int(coords[1])], 4)
+
+
         for i in range(len(vert_circles)):
             vert_circles[i].draw_class(screen)
-        # draw_test.draw_class(screen)
-        # draw_test_2.draw_class(screen)
+
         pygame.display.flip()
         clock.tick(60)
 
