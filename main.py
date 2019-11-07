@@ -29,6 +29,7 @@ class DrawSpline:
         self.points.append([int(self.coords[0]), int(self.coords[1])])
 
     def add_points(self, ticks, reset):
+
         if ticks > self.next_tick:
             self.next_tick += self.speed
             # print("X: {} Y: {}".format(self.indexX, self.indexY))
@@ -36,6 +37,10 @@ class DrawSpline:
             xCoords = self.shared_coords[self.indexX]
             yCoords = self.shared_coords[self.indexY]
             self.coords = self.coords_init[0] - xCoords[0] + 19, yCoords[1]
+            # self.coords = xCoords, yCoords
+            # self.angle = 90
+            # self.radius = 0.5
+            # move_coords(self.angle, self.radius, self.coords)
             self.rect.topleft = self.coords
             self.points.append([int(self.coords[0]), int(self.coords[1])])
 
@@ -59,6 +64,7 @@ class DrawCircle:
     shared_coords = {}
 
     def __init__(self, color, speed, coords, angle, radius, next_tick, index):
+
         self.color = color
         self.speed = speed
         self.coords = coords
@@ -74,6 +80,7 @@ class DrawCircle:
         self.shared_coords[self.index] = self.coords
 
     def add_points(self, ticks):
+
         if ticks > self.next_tick:
             self.next_tick += self.speed
             self.angle += 1
@@ -180,6 +187,7 @@ def main():
         for spline in splines:
             spline.put_shared_coords(vert_circles[0].get_shared_coords())
             spline.add_points(ticks, reset[0])
+
 
         screen.fill((0, 0, 30))
 
