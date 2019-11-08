@@ -30,13 +30,15 @@ class DrawSpline:
 
     def add_points(self, ticks, reset):
 
+        print("X: {} Y: {}".format(self.indexX, self.indexY))
+
         if ticks > self.next_tick:
             self.next_tick += self.speed
             # print("X: {} Y: {}".format(self.indexX, self.indexY))
             # print(self.shared_coords)
             xCoords = self.shared_coords[self.indexX]
             yCoords = self.shared_coords[self.indexY]
-            self.coords = self.coords_init[0] - xCoords[0] + 19, yCoords[1]
+            self.coords =  xCoords[0] - self.coords_init[0] + (150 + (78 * (self.indexY + 1))) , yCoords[1]
             # self.coords = xCoords, yCoords
             # self.angle = 90
             # self.radius = 0.5
@@ -80,22 +82,32 @@ class DrawCircle:
         self.shared_coords[self.index] = self.coords
 
     def add_points(self, ticks):
-
+        # if self.index == 7:
+        #     print(self.coords)
         if ticks > self.next_tick:
             self.next_tick += self.speed
             self.angle += 1
             self.coords = move_coords(self.angle, self.radius, self.coords)
             self.rect.topleft = self.coords
-            self.points.append([int(self.coords[0]), int(self.coords[1])])
+
             self.shared_coords[self.index] = self.coords
 
-        if self.points[-1] == [self.coords_init[0] - 1, self.coords_init[1] - 1]:
+        # if self.points[-1] == [self.coords_init[0] - 1, self.coords_init[1] - 1]:
+        #     self.coords = self.coords_init
+        #     self.angle = self.angle_init
+        #     self.points.clear()
+        #     self.points.append([int(self.coords[0]), int(self.coords[1])])
+        #     self.coords = move_coords(self.angle, self.radius, self.coords)
+        #     self.points.append([int(self.coords[0]), int(self.coords[1])])
+        #     if self.index == 0:
+        #         return True
+
+
+        if self.angle == 90 + 360:
             self.coords = self.coords_init
             self.angle = self.angle_init
-            self.points.clear()
-            self.points.append([int(self.coords[0]), int(self.coords[1])])
-            self.coords = move_coords(self.angle, self.radius, self.coords)
-            self.points.append([int(self.coords[0]), int(self.coords[1])])
+
+
             if self.index == 0:
                 return True
 
