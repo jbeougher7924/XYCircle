@@ -43,7 +43,7 @@ class DrawSpline:
 
             if self.indexX == 1:
                 print("self.coords '{}' = xCoords[0] '{}' - self.coords_init[0] '{}' + (145 + (78 * (self.indexY '{}' + 1))), yCoords[1] '{}' ".format(self.coords, xCoords[0], self.coords_init[0], self.indexY, yCoords[1]))
-                self.coords = self.coords[0] + 10, self.coords[1]
+                # self.coords = self.coords[0] + 10, self.coords[1]
 
             # print("X: {} Y: {}".format(self.coords_init[0], self.coords_init[1]))
             # print("X: {} Y: {}".format(xCoords[0], yCoords[1]))
