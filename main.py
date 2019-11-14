@@ -30,21 +30,31 @@ class DrawSpline:
 
     def add_points(self, ticks, reset):
 
-        print("X: {} Y: {}".format(self.indexX, self.indexY))
+        # print("X: {} Y: {}".format(self.indexX, self.indexY))
 
         if ticks > self.next_tick:
             self.next_tick += self.speed
-            # print("X: {} Y: {}".format(self.indexX, self.indexY))
-            # print(self.shared_coords)
+
+
             xCoords = self.shared_coords[self.indexX]
             yCoords = self.shared_coords[self.indexY]
-            self.coords =  xCoords[0] - self.coords_init[0] + (150 + (78 * (self.indexY + 1))) , yCoords[1]
+            # self.coords =  xCoords[0] - self.coords_init[0] + (150 + (78 * (self.indexY + 1 ))) , yCoords[1]
+            self.coords = xCoords[0] - self.coords_init[0] + ((145 * (self.indexX + 2) ) ), yCoords[1]
+
+            if self.indexX == 1:
+                print("self.coords '{}' = xCoords[0] '{}' - self.coords_init[0] '{}' + (145 + (78 * (self.indexY '{}' + 1))), yCoords[1] '{}' ".format(self.coords, xCoords[0], self.coords_init[0], self.indexY, yCoords[1]))
+                self.coords = self.coords[0] + 10, self.coords[1]
+
+            # print("X: {} Y: {}".format(self.coords_init[0], self.coords_init[1]))
+            # print("X: {} Y: {}".format(xCoords[0], yCoords[1]))
+            # print(self.coords)
             # self.coords = xCoords, yCoords
             # self.angle = 90
             # self.radius = 0.5
             # move_coords(self.angle, self.radius, self.coords)
             self.rect.topleft = self.coords
             self.points.append([int(self.coords[0]), int(self.coords[1])])
+
 
         if reset:
             self.coords = self.coords_init
