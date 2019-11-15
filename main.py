@@ -43,7 +43,7 @@ class DrawSpline:
 
             if self.indexX == 1:
                 pass
-            print("self.coords '{}' = xCoords[0] '{}' - self.coords_init[0] '{}' + (145 + (78 * (self.indexY '{}' + 1))), yCoords[1] '{}' ".format(self.coords, xCoords[0], self.coords_init[0], self.indexY, yCoords[1]))
+            # print("self.coords '{}' = xCoords[0] '{}' - self.coords_init[0] '{}' + (145 + (78 * (self.indexY '{}' + 1))), yCoords[1] '{}' ".format(self.coords, xCoords[0], self.coords_init[0], self.indexY, yCoords[1]))
                 # self.coords = self.coords[0] + 10, self.coords[1]
 
             # print("X: {} Y: {}".format(self.coords_init[0], self.coords_init[1]))
@@ -113,11 +113,9 @@ class DrawCircle:
         #     if self.index == 0:
         #         return True
 
-
         if self.angle == 90 + 360:
             self.coords = self.coords_init
             self.angle = self.angle_init
-
 
             if self.index == 0:
                 return True
@@ -133,6 +131,7 @@ class DrawCircle:
         # pygame.draw.lines(screen, self.color, False, self.points, 1)
         pygame.draw.circle(screen, self.color, [int(self.coords_init[0] - 30), int(self.coords_init[1])], 30, 1)
         pygame.draw.circle(screen, WHITE, [int(self.coords[0]), int(self.coords[1])], 4)
+
 
     def get_shared_coords(self):
         return self.shared_coords
