@@ -39,10 +39,11 @@ class DrawSpline:
             xCoords = self.shared_coords[self.indexX]
             yCoords = self.shared_coords[self.indexY]
             # self.coords =  xCoords[0] - self.coords_init[0] + (150 + (78 * (self.indexY + 1 ))) , yCoords[1]
-            self.coords = xCoords[0] - self.coords_init[0] + ((145 * (self.indexX + 2) ) ), yCoords[1]
+            self.coords = (xCoords[0] - self.coords_init[0] + ((145 * (self.indexX + 2) ) )) - (67  - (11 * self.indexX )) , yCoords[1]
 
             if self.indexX == 1:
-                print("self.coords '{}' = xCoords[0] '{}' - self.coords_init[0] '{}' + (145 + (78 * (self.indexY '{}' + 1))), yCoords[1] '{}' ".format(self.coords, xCoords[0], self.coords_init[0], self.indexY, yCoords[1]))
+                pass
+            print("self.coords '{}' = xCoords[0] '{}' - self.coords_init[0] '{}' + (145 + (78 * (self.indexY '{}' + 1))), yCoords[1] '{}' ".format(self.coords, xCoords[0], self.coords_init[0], self.indexY, yCoords[1]))
                 # self.coords = self.coords[0] + 10, self.coords[1]
 
             # print("X: {} Y: {}".format(self.coords_init[0], self.coords_init[1]))
