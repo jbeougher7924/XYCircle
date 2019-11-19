@@ -35,6 +35,48 @@ class DrawSpline:
         if ticks > self.next_tick:
             self.next_tick += self.speed
 
+            xCoords = self.shared_coords[self.indexX]
+            yCoords = self.shared_coords[self.indexY + 7]
+
+            # print(xCoords)
+            # print(yCoords)
+            # print("*******")
+
+            # self.coords = (xCoords[0] - self.coords_init[0] + ((145 * (self.indexX + 2) ) )) - (67  - (11 * self.indexX )) , yCoords[1]
+            self.coords = yCoords[0], xCoords[1]
+
+            if self.indexX == 1:
+                pass
+            # print("self.coords '{}' = xCoords[0] '{}' - self.coords_init[0] '{}' + (145 + (78 * (self.indexY '{}' + 1))), yCoords[1] '{}' ".format(self.coords, xCoords[0], self.coords_init[0], self.indexY, yCoords[1]))
+                # self.coords = self.coords[0] + 10, self.coords[1]
+
+            # print("X: {} Y: {}".format(self.coords_init[0], self.coords_init[1]))
+            # print("X: {} Y: {}".format(xCoords[0], yCoords[1]))
+            # print(self.coords)
+            # self.coords = xCoords, yCoords
+            # self.angle = 90
+            # self.radius = 0.5
+            # move_coords(self.angle, self.radius, self.coords)
+            self.rect.topleft = self.coords
+            self.points.append([int(self.coords[0]), int(self.coords[1])])
+            # print(self.points)
+
+
+        if reset:
+            self.coords = self.coords_init
+            temp = []
+            temp.append(self.points[1])
+            self.points.clear()
+            self.points.append([int(self.coords[0]), int(self.coords[1])])
+            self.points.append(temp[0])
+
+    def add_points_2(self, ticks, reset):
+
+        # print("X: {} Y: {}".format(self.indexX, self.indexY))
+
+        if ticks > self.next_tick:
+            self.next_tick += self.speed
+
 
             xCoords = self.shared_coords[self.indexX]
             yCoords = self.shared_coords[self.indexY]
@@ -176,13 +218,21 @@ def main():
         speed = 30 / (i + 1)
         vert_circles.append(DrawCircle(RainBow[i], speed, test_coords, 90, 0.5, 1, i + 7))
 
-    for x in range(7):
-        xCoords = 150 + (78 * x)
-        for y in range(7):
-            speedX = 30 / (x + 1)
-            speedY = 30 / (y + 1)
-            yCoords = 110 + (78 * y)
-            splines.append(DrawSpline(RainBow[x], RainBow[y], speedX, speedY, xCoords, yCoords, x, y, 1))
+        for x in range(7):
+            xCoords = 150 + (78 * x) - 40
+            for y in range(7):
+                speedX = 30 / (x + 1)
+                speedY = 30 / (y + 1)
+                yCoords = 110 + (78 * y) + 39
+                splines.append(DrawSpline(RainBow[x], RainBow[y], speedX, speedY, yCoords, xCoords, x, y, 1))
+
+    # for x in range(7):
+    #     xCoords = 150 + (78 * x)
+    #     for y in range(7):
+    #         speedX = 30 / (x + 1)
+    #         speedY = 30 / (y + 1)
+    #         yCoords = 110 + (78 * y)
+    #         splines.append(DrawSpline(RainBow[x], RainBow[y], speedX, speedY, xCoords, yCoords, x, y, 1))
 
     # for i in range(7):
     #     for j in range(7):
