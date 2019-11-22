@@ -108,7 +108,7 @@ class DrawSpline:
             self.points.append(temp[0])
 
     def draw_class(self, screen):
-        pygame.draw.lines(screen, self.color, False, self.points, 1)
+        pygame.draw.line(screen, self.color, self.points[-2], self.points[-1], 1)
         # pygame.draw.circle(screen, self.color, [int(self.coords_init[0] - 30), int(self.coords_init[1])], 30, 1)
 
     def put_shared_coords(self, shared_coords):
@@ -164,16 +164,10 @@ class DrawCircle:
 
         return False
 
-        # print("points[-1]")
-        # print(self.points[-1])
-        # print("coords")
-        # print(self.coords)
-
     def draw_class(self, screen):
         # pygame.draw.lines(screen, self.color, False, self.points, 1)
         pygame.draw.circle(screen, self.color, [int(self.coords_init[0] - 30), int(self.coords_init[1])], 30, 1)
         pygame.draw.circle(screen, WHITE, [int(self.coords[0]), int(self.coords[1])], 4)
-
 
     def get_shared_coords(self):
         return self.shared_coords
@@ -226,19 +220,7 @@ def main():
                 yCoords = 110 + (78 * y) + 39
                 splines.append(DrawSpline(RainBow[x], RainBow[y], speedX, speedY, yCoords, xCoords, x, y, 1))
 
-    # for x in range(7):
-    #     xCoords = 150 + (78 * x)
-    #     for y in range(7):
-    #         speedX = 30 / (x + 1)
-    #         speedY = 30 / (y + 1)
-    #         yCoords = 110 + (78 * y)
-    #         splines.append(DrawSpline(RainBow[x], RainBow[y], speedX, speedY, xCoords, yCoords, x, y, 1))
 
-    # for i in range(7):
-    #     for j in range(7):
-    #         test_coords = 150 + (78 * i), 110 + (78 * j)
-    #         speed = 30 / (i + 1)
-    #         vert_circles.append(DrawCircle(RainBow[i], speed, test_coords, 90, 0.5, 1))
 
     running = True
     reset = []
@@ -260,14 +242,26 @@ def main():
             spline.put_shared_coords(vert_circles[0].get_shared_coords())
             spline.add_points(ticks, reset[0])
 
+        # test_coords =  78, 110 + (78 * i)
+        # pygame.Rect(self.coords[0], self.coords[1], 20, 20)
 
-        screen.fill((0, 0, 30))
+        vert_fill = pygame.Rect(84, 6, 540, 65)
+        screen.fill(BLACK, vert_fill)
+
+        # test_coords = 150 + (78 * i), 39
+        hortz_fill = pygame.Rect(15, 75, 67, 535)
+        screen.fill(BLACK, hortz_fill)
+
+        if(reset[0]):
+            spline_fill = pygame.Rect(78, 72, 545, 545)
+            screen.fill(BLACK, spline_fill)
 
         for vert_circle in vert_circles:
             vert_circle.draw_class(screen)
 
         for spline in splines:
             spline.draw_class(screen)
+
         reset.clear()
         pygame.display.flip()
         clock.tick(360)
