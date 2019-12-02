@@ -1,5 +1,6 @@
 import pygame
 import math
+import numpy as np
 
 BLACK = [0, 0, 0]
 WHITE = [255, 255, 255]
@@ -11,6 +12,7 @@ GREEN = [0, 255, 0]
 BLUE = [0, 0, 255]
 INDIGO = [75, 0, 130]
 VIOLET = [255, 0, 255]
+
 
 
 class DrawSpline:
@@ -109,6 +111,8 @@ class DrawSpline:
 
     def draw_class(self, screen):
         pygame.draw.line(screen, self.color, self.points[-2], self.points[-1], 1)
+        # pygame.draw.circle(screen, WHITE, self.points[-1], 2)
+
         # pygame.draw.circle(screen, self.color, [int(self.coords_init[0] - 30), int(self.coords_init[1])], 30, 1)
 
     def put_shared_coords(self, shared_coords):
@@ -253,6 +257,7 @@ def main():
         screen.fill(BLACK, hortz_fill)
 
         if(reset[0]):
+        # if(True):
             spline_fill = pygame.Rect(78, 72, 545, 545)
             screen.fill(BLACK, spline_fill)
 
@@ -263,6 +268,17 @@ def main():
             spline.draw_class(screen)
 
         reset.clear()
+        pxarray = pygame.PixelArray(screen)
+
+
+        pxarray[50:40, 3:5] = (10,255,10)
+
+        newarray = pxarray[50:40, 3:5]
+
+        pxarray[10:0, 3:5] = newarray
+
+        del pxarray
+        del newarray
         pygame.display.flip()
         clock.tick(360)
 
